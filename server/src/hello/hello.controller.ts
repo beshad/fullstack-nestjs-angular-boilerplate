@@ -2,8 +2,8 @@ import { Controller, Get } from '@nestjs/common';
 
 @Controller('hello')
 export class HelloController {
-@Get()
-getAll() {
-  return {status: 'hello world'}
-}
+  @Get()
+  index() {
+    return { status: 'hello world' }
+  }
 }
