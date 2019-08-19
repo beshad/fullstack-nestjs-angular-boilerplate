@@ -1,7 +1,11 @@
 import { Module } from '@nestjs/common';
 import { AngularUniversalModule } from '@nestjs/ng-universal';
 import { join } from 'path';
-import { HelloController } from './src/hello/hello.controller';
+import { UserController } from './src/user/user.controller';
+import { MongooseModule } from '@nestjs/mongoose';
+import { UserModule } from './src/user/user.module';
+import { UserService } from './src/user/user.service';
+
 
 @Module({
   imports: [
@@ -9,8 +13,11 @@ import { HelloController } from './src/hello/hello.controller';
       viewsPath: join(process.cwd(), 'dist/browser'),
       bundle: require('../server/main'),
       liveReload: true
-    })
+    }),
+    MongooseModule.forRoot('mongodb://localhost/fullstack-nestjs-angular-boilerplate',{ useNewUrlParser: true }),
+    UserModule
   ],
-  controllers: [HelloController]
+  controllers: [],
+  providers: []
 })
 export class ApplicationModule {}
