@@ -1,10 +1,17 @@
-import { Component } from '@angular/core';
+import { AfterViewChecked, ChangeDetectorRef, Component } from '@angular/core';
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  template: `
+     <h1> it works </h1>
+     <router-outlet></router-outlet>
+  `
 })
-export class AppComponent {
-  title = 'anglar frontend works';
+export class AppComponent implements AfterViewChecked {
+
+  constructor(private changeDetector: ChangeDetectorRef) { }
+
+  ngAfterViewChecked() {
+    this.changeDetector.detectChanges();
+  }
 }
