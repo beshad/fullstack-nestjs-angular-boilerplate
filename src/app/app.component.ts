@@ -3,7 +3,6 @@ import { AfterViewChecked, ChangeDetectorRef, Component } from '@angular/core';
 @Component({
   selector: 'app-root',
   template: `
-     <h1> it works </h1>
      <router-outlet></router-outlet>
   `
 })
