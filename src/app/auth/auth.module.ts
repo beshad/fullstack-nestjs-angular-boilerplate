@@ -9,6 +9,8 @@ import { LogoutComponent } from './logout/logout.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthComponent } from './auth.component';
 
+import { AuthService } from './auth.service';
+
 @NgModule({
   declarations: [
     RegisterComponent,
@@ -25,6 +27,9 @@ import { AuthComponent } from './auth.component';
     RegisterComponent,
     LoginComponent,
     LogoutComponent
-  ]
+  ],
+  providers: [
+    AuthService
+  ],
 })
 export class AuthModule { }
