@@ -17,6 +17,10 @@ export function tokenGetter() {
   return localStorage.getItem('token');
 }
 
+export function getLocalStorage() {
+  return (typeof window !== "undefined") ? window.localStorage : null;
+}
+
 export function jwtOptionsFactory(platformId) {
   return {
     tokenGetter: () => {
@@ -52,7 +56,9 @@ export function jwtOptionsFactory(platformId) {
       }
     })
   ],
-  providers: [UserService],
+  providers: [
+    UserService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {
