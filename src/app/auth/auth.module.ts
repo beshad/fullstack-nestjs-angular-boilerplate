@@ -7,7 +7,8 @@ import { LoginComponent } from './login/login.component';
 import { LogoutComponent } from './logout/logout.component';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { AuthComponent } from './auth.component';
+
+import { AuthRoutingModule } from './auth-routing.module';
 
 import { AuthService } from './auth.service';
 
@@ -15,18 +16,13 @@ import { AuthService } from './auth.service';
   declarations: [
     RegisterComponent,
     LoginComponent,
-    LogoutComponent,
-    AuthComponent
+    LogoutComponent
   ],
   imports: [
     CommonModule,
     FormsModule,
-    ReactiveFormsModule
-  ],
-  exports: [
-    RegisterComponent,
-    LoginComponent,
-    LogoutComponent
+    ReactiveFormsModule,
+    AuthRoutingModule
   ],
   providers: [
     AuthService

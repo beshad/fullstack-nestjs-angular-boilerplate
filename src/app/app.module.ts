@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { AppBootstrapModule } from './app-bootstrap/app-bootstrap.module';
 import { NgMaterialModule } from './app-material/app-material.module';
-import { NgModule, PLATFORM_ID } from '@angular/core';
+import { NgModule, PLATFORM_ID, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { JwtModule, JWT_OPTIONS } from '@auth0/angular-jwt';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
@@ -15,10 +15,6 @@ import { UserService } from './user/user.service';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
-}
-
-export function getLocalStorage() {
-  return (typeof window !== "undefined") ? window.localStorage : null;
 }
 
 export function jwtOptionsFactory(platformId) {
@@ -41,7 +37,6 @@ export function jwtOptionsFactory(platformId) {
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
-    AppRoutingModule,
     AppBootstrapModule,
     BrowserAnimationsModule,
     NgMaterialModule,
@@ -54,11 +49,13 @@ export function jwtOptionsFactory(platformId) {
         useFactory: jwtOptionsFactory,
         deps: [PLATFORM_ID]
       }
-    })
+    }),
+    AppRoutingModule, // AppRoutingModule must be last.
   ],
   providers: [
     UserService
   ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]
 })
 export class AppModule {
