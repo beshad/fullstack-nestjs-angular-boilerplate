@@ -1,6 +1,6 @@
 import { AfterViewChecked, ChangeDetectorRef, Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { slider, stepper } from './base/animations/route-animations';
+import { slider, stepper, fader } from './base/animations/route-animations';
 
 
 @Component({
@@ -11,7 +11,12 @@ import { slider, stepper } from './base/animations/route-animations';
       <router-outlet #outlet="outlet"></router-outlet>
    </div>
   `,
-  animations: [slider ]
+  animations: [ 
+    // slider,
+    fader,
+    // slider,
+    // transformer,
+   ]
 })
 
 export class AppComponent implements AfterViewChecked {
