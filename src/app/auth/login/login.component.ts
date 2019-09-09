@@ -1,3 +1,4 @@
+import { backgroundChange } from '../../base/animations/sandbox-animations';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
@@ -7,10 +8,13 @@ import { AuthService } from '../auth.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.scss'],
+  animations: [ backgroundChange ]
 })
 
 export class LoginComponent implements OnInit {
+
+  state: String = 'inactive';
 
   loginForm: FormGroup;
   email = new FormControl('', [
@@ -28,7 +32,6 @@ export class LoginComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit() {
-    console.log('login also works');
     // if (this.auth.loggedIn) {
     //   this.router.navigate(['/']);
     // }
@@ -36,6 +39,11 @@ export class LoginComponent implements OnInit {
       email: this.email,
       password: this.password
     });
+  }
+
+  toggleState() {
+    this.state = this.state === 'active' ? 'inactive' : 'active';
+    console.log(this.state);
   }
 
   setClassEmail() {
