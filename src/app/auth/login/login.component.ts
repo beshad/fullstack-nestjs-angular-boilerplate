@@ -1,4 +1,3 @@
-import { backgroundChange } from '../../base/animations/sandbox-animations';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
@@ -8,8 +7,7 @@ import { AuthService } from '../auth.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss'],
-  animations: [ backgroundChange ]
+  styleUrls: ['./login.component.scss']
 })
 
 export class LoginComponent implements OnInit {
@@ -41,9 +39,8 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  toggleState() {
+  changeState() {
     this.state = this.state === 'active' ? 'inactive' : 'active';
-    console.log(this.state);
   }
 
   setClassEmail() {
