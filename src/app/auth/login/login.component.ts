@@ -39,10 +39,6 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  changeState() {
-    this.state = this.state === 'active' ? 'inactive' : 'active';
-  }
-
   setClassEmail() {
     return { 'has-danger': !this.email.pristine && !this.email.valid };
   }

@@ -1,10 +1,29 @@
 import { Controller, Get, Res, HttpStatus, Post, Body, Put, Query, NotFoundException, Delete, Param } from '@nestjs/common';
-import { UserService } from './User.service';
+import { UserService } from './user.service';
+import { AuthService } from '../auth/auth.service';
 import { CreateUserDTO } from './dto/create-user.dto';
 
-@Controller('user')
+@Controller('users')
 export class UserController {
-  constructor(private UserService: UserService) { }
+  constructor(private UserService: UserService, private authService: AuthService) { }
+
+  // login a User
+  @Post('/login')
+  async login(@Res() res, @Body() body) {
+    let user = await this.UserService.validateUserEmail(body.email);
+    console.log(user);
+
+      res.status(HttpStatus.OK).json({
+        message: "User can login"
+      })
+    
+    // if (!user) throw new NotFoundException('User does not exist!');
+    // const User = await this.authService.login(body);
+    // return res.status(HttpStatus.OK).json({
+    //   message: "User can login",
+    //   User
+    // })
+  }
 
   // add a User
   @Post('/create')
@@ -52,4 +71,5 @@ export class UserController {
       User
     })
   }
+
 }

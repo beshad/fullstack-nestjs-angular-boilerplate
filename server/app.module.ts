@@ -5,6 +5,7 @@ import { UserController } from './src/user/user.controller';
 import { MongooseModule } from '@nestjs/mongoose';
 import { UserModule } from './src/user/user.module';
 import { UserService } from './src/user/user.service';
+import { AuthModule } from './src/auth/auth.module';
 
 
 @Module({
@@ -15,7 +16,8 @@ import { UserService } from './src/user/user.service';
       liveReload: true
     }),
     MongooseModule.forRoot('mongodb://localhost/fullstack-nestjs-angular-boilerplate',{ useNewUrlParser: true }),
-    UserModule
+    UserModule,
+    AuthModule
   ],
   controllers: [],
   providers: []
