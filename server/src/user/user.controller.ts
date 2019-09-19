@@ -1,31 +1,22 @@
-import { Controller, Get, Res, HttpStatus, Post, Body, Put, Query, NotFoundException, Delete, Param } from '@nestjs/common';
+import { Controller, Get, Res, HttpStatus, Post, Body, Put, Query, NotFoundException, Delete, Param, UseGuards, Request} from '@nestjs/common';
 import { UserService } from './user.service';
 import { AuthService } from '../auth/auth.service';
 import { CreateUserDTO } from './dto/create-user.dto';
+import { AuthGuard } from '@nestjs/passport';
 
 @Controller('users')
 export class UserController {
   constructor(private UserService: UserService, private authService: AuthService) { }
 
   // login a User
-  @Post('/login')
-  async login(@Res() res, @Body() body) {
-    let user = await this.UserService.validateUserEmail(body.email);
-    console.log(user);
-
-      res.status(HttpStatus.OK).json({
-        message: "User can login"
-      })
-    
-    // if (!user) throw new NotFoundException('User does not exist!');
-    // const User = await this.authService.login(body);
-    // return res.status(HttpStatus.OK).json({
-    //   message: "User can login",
-    //   User
-    // })
+  @UseGuards(AuthGuard('local'))
+  @Post('login')
+  async login(@Request() req) {
+    return req.user;
   }
 
   // add a User
+  @UseGuards(AuthGuard('jwt'))
   @Post('/create')
   async addUser(@Res() res, @Body() createUserDTO: CreateUserDTO) {
     const User = await this.UserService.addUser(createUserDTO);
@@ -36,6 +27,7 @@ export class UserController {
   }
 
   // Retrieve Users list
+  @UseGuards(AuthGuard('jwt'))
   @Get('users')
   async getAllUser(@Res() res) {
     const Users = await this.UserService.getAllUser();
@@ -43,6 +35,7 @@ export class UserController {
   }
 
   // Fetch a particular User using ID
+  @UseGuards(AuthGuard('jwt'))
   @Get('user/:userID')
   async getUser(@Res() res, @Param('userID') UserID) {
     const User = await this.UserService.getUser(UserID);
@@ -51,6 +44,7 @@ export class UserController {
   }
 
   // Update a User's details
+  @UseGuards(AuthGuard('jwt'))
   @Put('/update')
   async updateUser(@Res() res, @Query('userID') UserID, @Body() createUserDTO: CreateUserDTO) {
     const User = await this.UserService.updateUser(UserID, createUserDTO);
@@ -62,6 +56,7 @@ export class UserController {
   }
 
   // Delete a User
+  @UseGuards(AuthGuard('jwt'))
   @Delete('/delete')
   async deleteUser(@Res() res, @Query('UserID') UserID) {
     const User = await this.UserService.deleteUser(UserID);

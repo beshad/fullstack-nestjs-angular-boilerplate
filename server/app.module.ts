@@ -1,10 +1,8 @@
 import { Module } from '@nestjs/common';
 import { AngularUniversalModule } from '@nestjs/ng-universal';
 import { join } from 'path';
-import { UserController } from './src/user/user.controller';
 import { MongooseModule } from '@nestjs/mongoose';
 import { UserModule } from './src/user/user.module';
-import { UserService } from './src/user/user.service';
 import { AuthModule } from './src/auth/auth.module';
 
 

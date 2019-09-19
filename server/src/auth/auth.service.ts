@@ -1,18 +1,29 @@
 
-import { Injectable, NotFoundException, HttpStatus } from '@nestjs/common';
-import { ExtractJwt } from 'passport-jwt';
-import * as jwt from 'jsonwebtoken';
+import { Injectable } from '@nestjs/common';
+import { UserService } from '../user/user.service';
+import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
 export class AuthService {
-  constructor() { }
+  constructor(
+    private readonly userService: UserService,
+    private readonly jwtService: JwtService
+  ) { }
 
-  async login(body): Promise<any> {
-    // let isMatch = await user.comparePassword(body.password); 
-    // if (!isMatch) throw new NotFoundException('incorrect password');
-    // return await jwt.sign(
-    //   { user }, 
-    //   process.env.SECRET_TOKEN);
+  async validateUser(email: string, password: string): Promise<any> {
+    const user = await this.userService.validateUserEmail(email);
+    if (user && user.password === password) {
+      const { password, ...result } = user;
+      return result;
+    }
+    return null;
+  }
+
+  async login(user: any) {
+    const payload = { username: user.username, sub: user.userId };
+    return {
+      access_token: this.jwtService.sign(payload),
+    };
   }
 
 }

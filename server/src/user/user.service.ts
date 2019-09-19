@@ -34,9 +34,9 @@ export class UserService {
     return deletedUser;
   }
 
-      // check if user email exists
-      async validateUserEmail(email): Promise<any> {
-        return await this.UserModel.findOne({ email }).exec();
-      }
+  // check if user email exists
+  async validateUserEmail(email): Promise<any> {
+    return await this.UserModel.findOne({ email }).exec();
+  }
 
 }
