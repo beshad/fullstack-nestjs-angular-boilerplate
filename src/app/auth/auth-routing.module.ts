@@ -5,6 +5,8 @@ import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 import { LogoutComponent } from './logout/logout.component';
 
+import { AuthGuard } from './_helpers/auth.guard';
+
 const authRoutes: Routes = [
   {
     path: 'register',
@@ -14,6 +16,7 @@ const authRoutes: Routes = [
   {
     path: 'login',
     component: LoginComponent,
+    // canActivate: [AuthGuard],
     data: { animation: 'login' }
   },
   { path: 'logout', component: LogoutComponent },

@@ -1,56 +1,65 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router, ActivatedRoute } from '@angular/router';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { first } from 'rxjs/operators';
 
 import { AuthService } from '../auth.service';
 
-@Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+@Component({ 
+  templateUrl: 'login.component.html' 
 })
 
 export class LoginComponent implements OnInit {
+    loginForm: FormGroup;
+    loading = false;
+    submitted = false;
+    returnUrl: string;
+    error = '';
 
-  state: String = 'inactive';
+    constructor(
+        private formBuilder: FormBuilder,
+        private route: ActivatedRoute,
+        private router: Router,
+        private authenticationService: AuthService
+    ) { 
+        // redirect to home if already logged in
+        if (this.authenticationService.currentUserValue) { 
+            this.router.navigate(['/']);
+        }
+    }
 
-  loginForm: FormGroup;
-  email = new FormControl('', [
-    Validators.required,
-    Validators.minLength(3),
-    Validators.maxLength(100)
-  ]);
-  password = new FormControl('', [
-    Validators.required,
-    Validators.minLength(6)
-  ]);
+    ngOnInit() {
+        this.loginForm = this.formBuilder.group({
+            username: ['', Validators.required],
+            password: ['', Validators.required]
+        });
 
-  constructor(private auth: AuthService,
-    private formBuilder: FormBuilder,
-    private router: Router) { }
+        // get return url from route parameters or default to '/'
+        this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+    }
 
-  ngOnInit() {
-    // if (this.auth.loggedIn) {
-    //   this.router.navigate(['/']);
-    // }
-    this.loginForm = this.formBuilder.group({
-      email: this.email,
-      password: this.password
-    });
-  }
+    // convenience getter for easy access to form fields
+    get f() { return this.loginForm.controls; }
 
-  setClassEmail() {
-    return { 'has-danger': !this.email.pristine && !this.email.valid };
-  }
+    onSubmit() {
+        this.submitted = true;
 
-  setClassPassword() {
-    return { 'has-danger': !this.password.pristine && !this.password.valid };
-  }
+        // stop here if form is invalid
+        if (this.loginForm.invalid) {
+            return;
+        }
 
-  login() {
-    this.auth.login(this.loginForm.value).subscribe(
-      res => this.router.navigate(['/'])
-    );
-  }
-
+        this.loading = true;
+        this.authenticationService.login(this.f.username.value, this.f.password.value)
+            .pipe(first())
+            .subscribe(
+                data => {
+                    console.log(data);
+                    this.router.navigate([this.returnUrl]);
+                },
+                error => {
+                    this.error = error;
+                    this.loading = false;
+                });
+    }
 }

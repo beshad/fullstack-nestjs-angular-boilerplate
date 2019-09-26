@@ -1,4 +1,4 @@
-import { Controller, Get, Res, HttpStatus, Post, Body, Put, Query, NotFoundException, Delete, Param, UseGuards, Request} from '@nestjs/common';
+import { Controller, Get, Res, HttpStatus, Post, Body, Put, Query, NotFoundException, Delete, Param, UseGuards, Request } from '@nestjs/common';
 import { UserService } from './user.service';
 import { AuthService } from '../auth/auth.service';
 import { CreateUserDTO } from './dto/create-user.dto';
@@ -6,13 +6,16 @@ import { AuthGuard } from '@nestjs/passport';
 
 @Controller('users')
 export class UserController {
-  constructor(private UserService: UserService, private authService: AuthService) { }
+  constructor(
+    private UserService: UserService,
+    private AuthService: AuthService
+  ) { }
 
   // login a User
   @UseGuards(AuthGuard('local'))
   @Post('login')
   async login(@Request() req) {
-    return req.user;
+    return this.AuthService.login(req.user);
   }
 
   // add a User

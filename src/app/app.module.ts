@@ -13,23 +13,6 @@ import { BaseModule } from './base/base.module';
 import { UserService } from './user/user.service';
 import { HomeComponent } from './home/home.component';
 
-export function tokenGetter() {
-  return localStorage.getItem('token');
-}
-
-export function jwtOptionsFactory(platformId) {
-  return {
-    tokenGetter: () => {
-      let token = null;
-      if (isPlatformBrowser(platformId)) {
-        token = sessionStorage.getItem('token');
-      }
-      return token;
-    },
-    whitelistedDomains: ['localhost:4000']
-  };
-}
-
 
 @NgModule({
   declarations: [
@@ -43,13 +26,6 @@ export function jwtOptionsFactory(platformId) {
     AuthModule,
     BaseModule,
     CommonModule,
-    JwtModule.forRoot({
-      jwtOptionsProvider: {
-        provide: JWT_OPTIONS,
-        useFactory: jwtOptionsFactory,
-        deps: [PLATFORM_ID]
-      }
-    }),
     AppRoutingModule, // AppRoutingModule must be last.
   ],
   providers: [

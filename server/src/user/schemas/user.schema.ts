@@ -1,11 +1,12 @@
 
 import * as mongoose from 'mongoose';
-const SHA256 = require("crypto-js/sha256");
+const crypto = require('crypto');
 import * as bcrypt from 'bcryptjs';
 
 export const UserSchema = new mongoose.Schema({
-  name: String,
+  _id: Number,
   email: String,
+  password: String,
   created_at: { type: Date, default: Date.now }
 });
 
@@ -18,7 +19,10 @@ UserSchema.pre('save', next => {
     bcrypt.hash(user.password, salt, (error, hash) => {
       if (error) { return next(error); }
       user.password = hash;
-      user.hash = SHA256(user.username + hash + Math.sqrt(new Date().getTime()));
+      // user.hash = SHA256(user.username + hash + Math.sqrt(new Date().getTime()));
+      user.hash = crypto.createHash('sha256')
+      .update(user.username + hash + Math.sqrt(new Date().getTime()))
+      .digest('base64');
       next();
     });
   });
