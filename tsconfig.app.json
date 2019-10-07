@@ -5,18 +5,18 @@
     "types": [],
     "paths": {
       "@app/*": [
-        "./src/app/*"
+        "./client/app/*"
       ],
       "@environments/*": [
-        "./src/environments/*"
+        "./client/environments/*"
       ]
     }
   },
   "include": [
-    "src/**/*.ts"
+    "client/**/*.ts"
   ],
   "exclude": [
-    "src/test.ts",
-    "src/**/*.spec.ts"
+    "client/test.ts",
+    "client/**/*.spec.ts"
   ]
 }

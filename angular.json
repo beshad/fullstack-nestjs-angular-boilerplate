@@ -11,25 +11,25 @@
         }
       },
       "root": "",
-      "sourceRoot": "src",
+      "sourceRoot": "client",
       "prefix": "app",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
             "outputPath": "dist/browser",
-            "index": "src/index.html",
-            "main": "src/main.ts",
-            "polyfills": "src/polyfills.ts",
+            "index": "client/index.html",
+            "main": "client/main.ts",
+            "polyfills": "client/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
             "aot": false,
             "assets": [
-              "src/favicon.ico",
-              "src/assets"
+              "client/favicon.ico",
+              "client/assets"
             ],
             "styles": [
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
-              "src/styles.scss"
+              "client/styles.scss"
             ],
             "scripts": []
           },
@@ -37,8 +37,8 @@
             "production": {
               "fileReplacements": [
                 {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.prod.ts"
+                  "replace": "client/environments/environment.ts",
+                  "with": "client/environments/environment.prod.ts"
                 }
               ],
               "optimization": true,
@@ -80,16 +80,16 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "src/test.ts",
-            "polyfills": "src/polyfills.ts",
+            "main": "client/test.ts",
+            "polyfills": "client/polyfills.ts",
             "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "karma.conf.js",
             "assets": [
-              "src/favicon.ico",
-              "src/assets"
+              "client/favicon.ico",
+              "client/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "client/styles.scss"
             ],
             "scripts": []
           }
@@ -123,15 +123,15 @@
           "builder": "@angular-devkit/build-angular:server",
           "options": {
             "outputPath": "dist/server",
-            "main": "src/main.server.ts",
+            "main": "client/main.server.ts",
             "tsConfig": "tsconfig.server.json"
           },
           "configurations": {
             "production": {
               "fileReplacements": [
                 {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.prod.ts"
+                  "replace": "client/environments/environment.ts",
+                  "with": "client/environments/environment.prod.ts"
                 }
               ]
             }

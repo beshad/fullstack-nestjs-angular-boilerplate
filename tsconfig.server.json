@@ -4,6 +4,6 @@
     "outDir": "./out-tsc/app-server"
   },
   "angularCompilerOptions": {
-    "entryModule": "./src/app/app.server.module#AppServerModule"
+    "entryModule": "./client/app/app.server.module#AppServerModule"
   }
 }
