@@ -4,14 +4,13 @@ const crypto = require('crypto');
 import * as bcrypt from 'bcryptjs';
 
 export const UserSchema = new mongoose.Schema({
-  _id: Number,
   email: String,
   password: String,
   created_at: { type: Date, default: Date.now }
 });
 
 // Before saving the user, hash the password
-UserSchema.pre('save', next => {
+UserSchema.pre('save', function(next) {
   const user = this;
   if (!user.isModified('password')) { return next(); }
   bcrypt.genSalt(10, (err, salt) => {
@@ -19,9 +18,8 @@ UserSchema.pre('save', next => {
     bcrypt.hash(user.password, salt, (error, hash) => {
       if (error) { return next(error); }
       user.password = hash;
-      // user.hash = SHA256(user.username + hash + Math.sqrt(new Date().getTime()));
       user.hash = crypto.createHash('sha256')
-      .update(user.username + hash + Math.sqrt(new Date().getTime()))
+      .update(user.email + hash + Math.sqrt(new Date().getTime()))
       .digest('base64');
       next();
     });

@@ -9,8 +9,6 @@ import {
   keyframes
 } from '@angular/animations';
 
-const option = { optional: true };
-
 export const stepper =
   trigger('routeAnimations', [
     transition('* <=> *', [
@@ -28,14 +26,14 @@ export const stepper =
             style({ transform: 'scale(0.5) translateX(25%)', offset: 0.3 }),
             style({ transform: 'scale(1) translateX(0%)', offset: 1 }),
           ])),
-        ], option),
+        ], { optional: true }),
         query(':leave', [
           animate('2000ms ease', keyframes([
             style({ transform: 'scale(1)', offset: 0 }),
             style({ transform: 'scale(0.5) translateX(-25%) rotate(0)', offset: 0.35 }),
             style({ opacity: 0, transform: 'translateX(-50%) rotate(-180deg) scale(6)', offset: 1 }),
           ])),
-        ], option)
+        ], { optional: true })
       ]),
     ])
   ]);
@@ -50,21 +48,21 @@ export const slider =
           left: 0,
           width: '100%'
         })
-      ], option),
+      ], { optional: true }),
       query(':enter', [
         style({ left: '-100%' })
-      ]),
+      ], { optional: true }),
       group([
         query(':leave', [
           animate('600ms ease', style({ left: '100%' }))
-        ], option),
+        ], { optional: true }),
         query(':enter', [
           animate('600ms ease', style({ left: '0%' }))
-        ])
+        ], { optional: true })
       ]),
       // Required only if you have child animations on the page
-      query(':leave', animateChild()),
-      query(':enter', animateChild()),
+      query(':leave', animateChild(), { optional: true }),
+      query(':enter', animateChild(), { optional: true }),
     ]),
   ]);
 

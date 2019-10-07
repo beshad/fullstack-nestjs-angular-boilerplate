@@ -14,7 +14,6 @@ import { slider, stepper, fader } from './base/animations/route-animations';
   animations: [ 
     slider,
     // fader,
-    // slider,
     // transformer,
    ]
 })

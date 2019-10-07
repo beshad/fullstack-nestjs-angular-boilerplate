@@ -1,26 +1,29 @@
-import { Controller, Get, Res, HttpStatus, Post, Body, Put, Query, NotFoundException, Delete, Param, UseGuards, Request } from '@nestjs/common';
+import { Controller, forwardRef, Get, Res, HttpStatus, Post, Body, Put, Query, NotFoundException, Delete, Param, UseGuards, Request } from '@nestjs/common';
 import { UserService } from './user.service';
-import { AuthService } from '../auth/auth.service';
 import { CreateUserDTO } from './dto/create-user.dto';
 import { AuthGuard } from '@nestjs/passport';
 
 @Controller('users')
 export class UserController {
   constructor(
-    private UserService: UserService,
-    private AuthService: AuthService
+    private UserService: UserService
   ) { }
 
   // login a User
-  @UseGuards(AuthGuard('local'))
+  // @UseGuards(AuthGuard('local'))
   @Post('login')
-  async login(@Request() req) {
-    return this.AuthService.login(req.user);
+  async login(@Res() res, @Body() body) {
+    const user = await this.UserService.login(body);
+    console.log(user + '=================');
+    return res.status(HttpStatus.OK).json({
+      message: "User is successfully authenticated",
+      user
+    })
   }
 
   // add a User
-  @UseGuards(AuthGuard('jwt'))
-  @Post('/create')
+  // @UseGuards(AuthGuard('jwt'))
+  @Post('register')
   async addUser(@Res() res, @Body() createUserDTO: CreateUserDTO) {
     const User = await this.UserService.addUser(createUserDTO);
     return res.status(HttpStatus.OK).json({

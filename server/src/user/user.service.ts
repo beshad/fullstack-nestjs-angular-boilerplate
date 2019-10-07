@@ -1,29 +1,24 @@
-import { Injectable, forwardRef } from '@nestjs/common';
+import { Injectable, forwardRef, Inject } from '@nestjs/common';
 import { Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
 import { User } from './interfaces/User.interface';
 import { CreateUserDTO } from './dto/create-User.dto';
+import { AuthService } from '../auth/auth.service';
 
 @Injectable()
 export class UserService {
 
-  private  readonly users: User[];
+  private readonly users: User[];
 
   constructor(
-    @InjectModel('User') private readonly UserModel: Model<User>
-    ) {
-    this.users = [
-      {
-        _id: 1,
-        email: 'admin@example.com',
-        password: 'admin',
-      }
-    ];
-  }
+    @InjectModel('User') private readonly UserModel: Model<User>,
+    private readonly authService: AuthService
+  ) { }
 
-  // temporary
-  async findOne(email: string): Promise<User | undefined> {
-    return this.users.find(user => user.email === email);
+  // authenticate user
+  async login(payload) {
+    let { email, password } = payload;
+    return await this.authService.authenticateUser(email, password);
   }
 
   // fetch all Users
@@ -51,11 +46,6 @@ export class UserService {
   async deleteUser(UserID): Promise<any> {
     const deletedUser = await this.UserModel.findByIdAndRemove(UserID);
     return deletedUser;
-  }
-
-  // check if user email exists
-  async validateUserEmail(email): Promise<any> {
-    return await this.UserModel.findOne({ email }).exec();
   }
 
 }

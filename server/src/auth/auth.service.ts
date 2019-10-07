@@ -1,38 +1,36 @@
 
 import { Injectable } from '@nestjs/common';
-import { UserService } from '../user/user.service';
 import { JwtService } from '@nestjs/jwt';
+
+import { InjectModel } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
+import { User } from '../user/interfaces/User.interface';
 
 @Injectable()
 export class AuthService {
   constructor(
-    private readonly userService: UserService,
-    private readonly jwtService: JwtService
+    @InjectModel('User') private readonly UserModel: Model<User>,
+    private readonly jwtService: JwtService,
   ) { }
 
-  async validateUser(email: string, password: string): Promise<any> {
-    const user = await this.userService.findOne(email);
-    if (user && user.password === password) {
-      const { password, ...result } = user;
-      return result;
-    }
-    return null;
+  // check if user email exists
+  async validateUserEmail(email): Promise<any> {
+    return await this.UserModel.findOne({ email }).exec();
   }
 
-  // async validateUser(email: string, password: string): Promise<any> {
-  //   const user = await this.userService.validateUserEmail(email);
-  //   if (user && user.password === password) {
-  //     const { password, ...result } = user;
-  //     return result;
-  //   }
-  //   return null;
-  // }
-
-  async login(user: any) {
-    const payload = { email: user.email, sub: user.userId };
-    return {
-      access_token: this.jwtService.sign(payload),
-    };
+  // authenticate password
+  async authenticateUser(email, password): Promise<any> {
+    this.UserModel.findOne({ email }, (err, user) => {
+      if (!user) { return false }
+      user.comparePassword(password, (error, isMatch) => {
+        if (!isMatch) { return false; }
+        console.log(user + '=======================')
+        return {
+          access_token: this.jwtService.sign(email, password),
+          user
+        };
+      });
+    });
   }
 
 }
