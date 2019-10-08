@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { faHome, faUserPlus, faSignInAlt, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
-import { AuthService } from '../../../auth/auth.service'
+import { AuthService } from "@app/auth/auth.service"
 
 @Component({
   selector: 'app-navbar',
