@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 import { faHome, faUserPlus, faSignInAlt, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 import { AuthService } from '../../../auth/auth.service'
 
@@ -15,13 +16,17 @@ export class NavbarComponent implements OnInit {
   faSignOutAlt = faSignOutAlt
 
   currentUser: any
+  isLoggedIn: boolean
 
   constructor(
-    private readonly authService: AuthService) {
+    private readonly authService: AuthService, private router: Router) {
   }
 
   ngOnInit() {
-    this.currentUser = this.authService.currentUserValue
+    if (this.authService.isLoggedIn) {
+      this.isLoggedIn = this.authService.isLoggedIn
+      this.currentUser = this.authService.currentUserValue
+    }
   }
 
   logout() {

@@ -23,12 +23,12 @@
         </a>
       </li>
       <li class="nav-item">
-        <a (click)="logout()" class="nav-link">
+        <a routerLink="/login" (click)="logout()" class="nav-link">
           <fa-icon [icon]="faSignOutAlt"></fa-icon>
           <span [innerHTML]="'Signout'"></span>
         </a>
       </li>
-      <li class="nav-item">
+      <li class="nav-item" *ngIf="isLoggedIn">
         <a class="nav-link">
           <span [innerHTML]="currentUser.payload.email"></span>
         </a>
