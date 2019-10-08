@@ -1,10 +1,12 @@
 
-import { Injectable } from '@nestjs/common';
-import { JwtService } from '@nestjs/jwt';
+import { Injectable, UnauthorizedException } from '@nestjs/common'
+import { JwtService } from '@nestjs/jwt'
 
-import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
-import { User } from '../user/interfaces/User.interface';
+import { InjectModel } from '@nestjs/mongoose'
+import { Model } from 'mongoose'
+import { User } from '../user/interfaces/User.interface'
+
+import * as bcrypt from 'bcryptjs'
 
 @Injectable()
 export class AuthService {
@@ -14,23 +16,27 @@ export class AuthService {
   ) { }
 
   // check if user email exists
-  async validateUserEmail(email): Promise<any> {
-    return await this.UserModel.findOne({ email }).exec();
+  async validateUserEmail(email: string): Promise<any> {
+    return await this.UserModel.findOne({ email }).exec()
+  }
+
+  async comparePassword(userEnteredPassword: string, dbStoredPassword: string): Promise<any> {
+    return await bcrypt.compareSync(userEnteredPassword, dbStoredPassword)
   }
 
   // authenticate password
-  async authenticateUser(email, password): Promise<any> {
-    this.UserModel.findOne({ email }, (err, user) => {
-      if (!user) { return false }
-      user.comparePassword(password, (error, isMatch) => {
-        if (!isMatch) { return false; }
-        console.log(user + '=======================')
-        return {
-          access_token: this.jwtService.sign(email, password),
-          user
-        };
-      });
-    });
+  async authenticateUser(email: string, password: string): Promise<any> {
+    const user = await this.UserModel.findOne({ email }).exec()
+    if (!user) { throw new UnauthorizedException() }
+    const isMatch = await this.comparePassword(password, user.password)
+    if (!isMatch) { throw new UnauthorizedException() }
+    return {
+      access_token: this.jwtService.sign({
+        email: user.email,
+        sub: user.userId
+      }),
+      email: user.email
+    }
   }
 
 }

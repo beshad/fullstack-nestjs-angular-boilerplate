@@ -16,7 +16,7 @@ export class UserService {
   ) { }
 
   // authenticate user
-  async login(payload) {
+  async login(payload:any):Promise<any> {
     let { email, password } = payload;
     return await this.authService.authenticateUser(email, password);
   }
