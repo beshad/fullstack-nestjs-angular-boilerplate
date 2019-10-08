@@ -12,16 +12,13 @@ export class UserController {
   // login a User
   @Post('login')
   async login(@Res() res, @Body() body): Promise<any> {
-    const user = await this.UserService.login(body)
-    return res.status(HttpStatus.OK).json({
-      message: "User is successfully authenticated",
-      user
-    })
+    const payload = await this.UserService.login(body)
+    return res.status(HttpStatus.OK).json({ payload })
   }
 
   // add a User
   @Post('register')
-  async addUser(@Res() res, @Body() createUserDTO: CreateUserDTO):Promise<any> {
+  async addUser(@Res() res, @Body() createUserDTO: CreateUserDTO): Promise<any> {
     const User = await this.UserService.addUser(createUserDTO)
     return res.status(HttpStatus.OK).json({
       message: "User has been created successfully",

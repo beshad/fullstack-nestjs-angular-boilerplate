@@ -6,17 +6,31 @@
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
         <a routerLink="/" class="nav-link" routerLinkActive="active">
-          <i class="fa fa-home"></i> Home
+          <fa-icon [icon]="faHome"></fa-icon>
+          <span [innerHTML]="'Home'"></span>
         </a>
       </li>
       <li class="nav-item">
         <a routerLink="/login" class="nav-link" routerLinkActive="active">
-          <i class="fa fa-sign-in"></i> Login
+          <fa-icon [icon]="faSignInAlt"></fa-icon>
+          <span [innerHTML]="'Login'"></span>
         </a>
       </li>
       <li class="nav-item">
         <a routerLink="/register" class="nav-link" routerLinkActive="active">
-          <i class="fa fa-user-plus"></i> Register
+          <fa-icon [icon]="faUserPlus"></fa-icon>
+          <span [innerHTML]="'Register'"></span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a (click)="logout()" class="nav-link">
+          <fa-icon [icon]="faSignOutAlt"></fa-icon>
+          <span [innerHTML]="'Signout'"></span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link">
+          <span [innerHTML]="currentUser.payload.email"></span>
         </a>
       </li>
     </ul>

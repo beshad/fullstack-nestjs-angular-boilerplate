@@ -4,6 +4,7 @@ import { RouterModule } from '@angular/router';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { AppBootstrapModule } from './ngx-bootstrap/app-bootstrap.module';
 import { NgMaterialModule } from './ng-material/app-material.module';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [NavbarComponent],
@@ -12,11 +13,13 @@ import { NgMaterialModule } from './ng-material/app-material.module';
     RouterModule,
     AppBootstrapModule,
     NgMaterialModule,
+    FontAwesomeModule
   ],
   exports: [
     NavbarComponent,
     AppBootstrapModule,
     NgMaterialModule,
+    FontAwesomeModule
   ]
 })
 export class BaseModule { }
