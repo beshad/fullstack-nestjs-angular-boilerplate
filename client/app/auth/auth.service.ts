@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core'
 import { HttpClient } from '@angular/common/http'
 import { BehaviorSubject, Observable } from 'rxjs'
 import { map } from 'rxjs/operators'
-import { User } from '../user/user.model'
+import { User } from '@app/user/user.model'
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {

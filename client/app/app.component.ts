@@ -1,6 +1,6 @@
 import { AfterViewChecked, ChangeDetectorRef, Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { slider, stepper, fader } from './base/animations/route-animations';
+import { slider, stepper, fader } from '@app/base/animations/route-animations';
 
 
 @Component({

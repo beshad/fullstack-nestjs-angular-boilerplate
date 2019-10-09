@@ -6,10 +6,10 @@ import { LoginComponent } from './login/login.component';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { AuthRoutingModule } from './auth-routing.module';
-import { JwtInterceptor } from './_helpers/jwt.interceptor';
-import { ErrorInterceptor } from './_helpers/error.interceptor';
-import { AuthService } from './auth.service';
+import { AuthRoutingModule } from '@app/auth/auth-routing.module';
+import { JwtInterceptor } from '@app/auth/_helpers/jwt.interceptor';
+import { ErrorInterceptor } from '@app/auth/_helpers/error.interceptor';
+import { AuthService } from '@app/auth/auth.service';
 
 @NgModule({
   declarations: [

@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { RegisterComponent } from './register/register.component';
-import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from '@app/auth/register/register.component';
+import { LoginComponent } from '@app/auth/login/login.component';
 
-import { AuthGuard } from './_helpers/auth.guard';
+import { AuthGuard } from '@app/auth/_helpers/auth.guard';
 
 const authRoutes: Routes = [
   {
