@@ -11,11 +11,11 @@ import { slider, stepper, fader } from '@app/base/animations/route-animations';
       <router-outlet #outlet="outlet"></router-outlet>
    </div>
   `,
-  animations: [ 
+  animations: [
     slider,
     // fader,
     // transformer,
-   ]
+  ]
 })
 
 export class AppComponent implements AfterViewChecked {

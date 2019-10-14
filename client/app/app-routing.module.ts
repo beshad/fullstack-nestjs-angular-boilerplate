@@ -3,11 +3,11 @@ import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from '@app/home/home.component';
 
 const routes: Routes = [
-  { 
-    path: '', 
-    component: HomeComponent , 
+  {
+    path: '',
+    component: HomeComponent,
     data: { animation: 'home' },
-    pathMatch: 'full' 
+    pathMatch: 'full'
   },
   { path: '**', redirectTo: '', pathMatch: 'full' },
   // { path: '**', component: PageNotFoundComponent }

@@ -8,7 +8,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from '@app/app-routing.module';
 import { AppComponent } from '@app/app.component';
 import { AuthModule } from '@app/auth/auth.module';
-import { BaseModule } from '@app/base/base.module'; 
+import { BaseModule } from '@app/base/base.module';
 
 import { UserService } from '@app/user/user.service';
 import { HomeComponent } from '@app/home/home.component';
