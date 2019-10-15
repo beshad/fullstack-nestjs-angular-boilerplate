@@ -12,11 +12,11 @@ export class AdminComponent implements OnInit {
   items: NbMenuItem[] = [
     {
       title: 'Users',
-      // icon: { icon: 'person-outline', pack: 'eva' }
+      icon: { icon: 'person-outline', pack: 'eva' }
     },
     {
       title: 'Cats',
-      // icon: { icon: 'lock-outline', pack: 'eva' }
+      icon: { icon: 'lock-outline', pack: 'eva' }
     }
   ]
 

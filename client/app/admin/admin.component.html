@@ -1,13 +1,27 @@
-<nb-layout>
-  <nb-layout-header fixed>Company Name</nb-layout-header>
+<nb-layout center>
+  <nb-layout-header fixed>
+    <nb-icon icon="star" status="warning"></nb-icon> Lorem, ipsum.
+  </nb-layout-header>
 
   <nb-sidebar>
     <nb-menu [items]="items"></nb-menu>
   </nb-sidebar>
 
-  <nb-layout-column>
-    <nb-icon icon="star" status="warning"></nb-icon>
-    Page Content <button nbButton> Hello World</button>
+  <nb-layout-column class="colored-column-warning">
+    <nb-card>
+      <nb-card-body>
+        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aspernatur voluptatem quas dicta accusantium, provident exercitationem assumenda libero dignissimos delectus. Ad totam eligendi maiores nihil accusantium?
+      </nb-card-body>
+    </nb-card>
   </nb-layout-column>
-  
+  <nb-layout-column class="colored-column-info">
+    <nb-card>
+      <nb-card-body>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fuga, exercitationem aliquam mollitia sit ipsam ex soluta impedit, deleniti quam neque voluptas sequi! Ratione, aspernatur eos.
+      </nb-card-body>
+    </nb-card>
+  </nb-layout-column>
+
+  <nb-layout-footer>Contact us</nb-layout-footer>
+
 </nb-layout>

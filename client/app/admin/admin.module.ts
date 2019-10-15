@@ -7,7 +7,8 @@ import {
   NbLayoutModule,
   NbButtonModule,
   NbMenuModule,
-  NbIconModule
+  NbIconModule,
+  NbCardModule
 } from '@nebular/theme';
 
 
@@ -20,6 +21,7 @@ import {
     NbButtonModule,
     NbMenuModule.forRoot(),
     NbIconModule,
+    NbCardModule
   ]
 })
 export class AdminModule { }
