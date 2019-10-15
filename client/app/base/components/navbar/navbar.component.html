@@ -23,6 +23,12 @@
         </a>
       </li>
       <li class="nav-item">
+        <a routerLink="/admin" class="nav-link" routerLinkActive="active">
+          <fa-icon [icon]="faTools"></fa-icon>
+          <span [innerHTML]="'Admin'"></span>
+        </a>
+      </li>
+      <li class="nav-item">
         <a routerLink="/login" (click)="logout()" class="nav-link">
           <fa-icon [icon]="faSignOutAlt"></fa-icon>
           <span [innerHTML]="'Signout'"></span>

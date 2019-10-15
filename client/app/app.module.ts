@@ -9,10 +9,11 @@ import { AppRoutingModule } from '@app/app-routing.module';
 import { AppComponent } from '@app/app.component';
 import { AuthModule } from '@app/auth/auth.module';
 import { BaseModule } from '@app/base/base.module';
+import { AdminModule } from '@app/admin/admin.module'
 
 import { UserService } from '@app/user/user.service';
 import { HomeComponent } from '@app/home/home.component';
-
+import { NbThemeModule } from '@nebular/theme';
 
 @NgModule({
   declarations: [
@@ -25,8 +26,10 @@ import { HomeComponent } from '@app/home/home.component';
     HttpClientModule,
     AuthModule,
     BaseModule,
+    AdminModule,
     CommonModule,
     AppRoutingModule, // AppRoutingModule must be last.
+    NbThemeModule.forRoot({ name: 'dark' }),
   ],
   providers: [
     UserService

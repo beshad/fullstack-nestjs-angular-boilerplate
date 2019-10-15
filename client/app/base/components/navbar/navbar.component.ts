@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { faHome, faUserPlus, faSignInAlt, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
+import { faHome, faUserPlus, faSignInAlt, faSignOutAlt, faTools} from '@fortawesome/free-solid-svg-icons';
 import { AuthService } from "@app/auth/auth.service"
 
 @Component({
@@ -14,6 +14,7 @@ export class NavbarComponent implements OnInit {
   faUserPlus = faUserPlus
   faSignInAlt = faSignInAlt
   faSignOutAlt = faSignOutAlt
+  faTools = faTools
 
   currentUser: any
   isLoggedIn: boolean
