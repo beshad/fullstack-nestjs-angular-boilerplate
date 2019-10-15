@@ -14,6 +14,7 @@ import { AdminModule } from '@app/admin/admin.module'
 import { UserService } from '@app/user/user.service';
 import { HomeComponent } from '@app/home/home.component';
 import { NbThemeModule } from '@nebular/theme';
+import { NbEvaIconsModule } from '@nebular/eva-icons';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { NbThemeModule } from '@nebular/theme';
     CommonModule,
     AppRoutingModule, // AppRoutingModule must be last.
     NbThemeModule.forRoot({ name: 'dark' }),
+    NbEvaIconsModule
   ],
   providers: [
     UserService

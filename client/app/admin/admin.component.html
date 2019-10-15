@@ -1,9 +1,13 @@
-<<nb-layout>
+<nb-layout>
   <nb-layout-header fixed>Company Name</nb-layout-header>
 
-  <nb-sidebar>Sidebar Content</nb-sidebar>
+  <nb-sidebar>
+    <nb-menu [items]="items"></nb-menu>
+  </nb-sidebar>
 
   <nb-layout-column>
-    Page Content <button nbButton>Hello World</button>
+    <nb-icon icon="star" status="warning"></nb-icon>
+    Page Content <button nbButton> Hello World</button>
   </nb-layout-column>
+  
 </nb-layout>
