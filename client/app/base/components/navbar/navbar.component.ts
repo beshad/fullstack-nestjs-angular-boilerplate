@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Component  } from '@angular/core';
+import { Router } from '@angular/router';
 import { faHome, faUserPlus, faSignInAlt, faSignOutAlt, faTools } from '@fortawesome/free-solid-svg-icons';
 
 import { NbAuthJWTToken, NbAuthService, NbTokenService } from '@nebular/auth'
@@ -10,7 +10,7 @@ import { NbAccessChecker } from '@nebular/security'
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss']
 })
-export class NavbarComponent implements OnInit {
+export class NavbarComponent {
 
   faHome = faHome;
   faUserPlus = faUserPlus
@@ -33,13 +33,6 @@ export class NavbarComponent implements OnInit {
         }
 
       });
-  }
-
-  ngOnInit() { }
-
-  logout() {
-    this.nbTokenService.clear();
-    this.router.navigate(['auth/login']);
   }
 
 }
