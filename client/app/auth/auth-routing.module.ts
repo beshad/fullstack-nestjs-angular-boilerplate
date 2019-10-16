@@ -1,23 +1,46 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { RegisterComponent } from '@app/auth/register/register.component';
-import { LoginComponent } from '@app/auth/login/login.component';
-
-import { AuthGuard } from '@app/auth/_helpers/auth.guard';
+import {
+  NbAuthComponent,
+  NbLoginComponent,
+  NbRegisterComponent,
+  NbLogoutComponent,
+  NbRequestPasswordComponent,
+  NbResetPasswordComponent,
+} from '@nebular/auth';
 
 const authRoutes: Routes = [
   {
-    path: 'register',
-    component: RegisterComponent,
-    data: { animation: 'register' }
+    path: 'auth',
+    component: NbAuthComponent,
+    children: [
+      {
+        path: '',
+        component: NbLoginComponent,
+      },
+      {
+        path: 'login',
+        component: NbLoginComponent,
+      },
+      {
+        path: 'register',
+        component: NbRegisterComponent,
+      },
+      {
+        path: 'logout',
+        component: NbLogoutComponent,
+      },
+      {
+        path: 'request-password',
+        component: NbRequestPasswordComponent,
+      },
+      {
+        path: 'reset-password',
+        component: NbResetPasswordComponent,
+      },
+    ],
   },
-  {
-    path: 'login',
-    component: LoginComponent,
-    // canActivate: [AuthGuard],
-    data: { animation: 'login' }
-  }
 ];
 
 @NgModule({

@@ -5,7 +5,10 @@ import * as bcrypt from 'bcryptjs';
 export const UserSchema = new mongoose.Schema({
   email: { type: String, unique: true, lowercase: true, trim: true },
   password: { type: String, select: true },
-  created_at: { type: Date, default: Date.now }
+  confirmPassword: String,
+  fullname: String,
+  created_at: { type: Date, default: Date.now },
+  role: { type: String, default: 'user' }
 });
 
 // Before saving the user, hash the password

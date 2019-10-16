@@ -11,13 +11,13 @@
         </a>
       </li>
       <li class="nav-item">
-        <a routerLink="/login" class="nav-link" routerLinkActive="active">
+        <a routerLink="/auth/login" class="nav-link" routerLinkActive="active">
           <fa-icon [icon]="faSignInAlt"></fa-icon>
           <span [innerHTML]="'Login'"></span>
         </a>
       </li>
       <li class="nav-item">
-        <a routerLink="/register" class="nav-link" routerLinkActive="active">
+        <a routerLink="/auth/register" class="nav-link" routerLinkActive="active">
           <fa-icon [icon]="faUserPlus"></fa-icon>
           <span [innerHTML]="'Register'"></span>
         </a>
@@ -29,15 +29,13 @@
         </a>
       </li>
       <li class="nav-item">
-        <a routerLink="/login" (click)="logout()" class="nav-link">
+        <a routerLink="/auth/logout" (click)="logout()" class="nav-link">
           <fa-icon [icon]="faSignOutAlt"></fa-icon>
           <span [innerHTML]="'Signout'"></span>
         </a>
       </li>
-      <li class="nav-item" *ngIf="isLoggedIn">
-        <a class="nav-link">
-          <span [innerHTML]="currentUser.payload.email"></span>
-        </a>
+      <li class="nav-item">
+          <nb-user [name]="currentUser?.email" [picture]="currentUser?.picture"></nb-user>
       </li>
     </ul>
   </div>

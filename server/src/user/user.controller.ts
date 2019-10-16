@@ -12,8 +12,8 @@ export class UserController {
   // login a User
   @Post('login')
   async login(@Res() res, @Body() body): Promise<any> {
-    const payload = await this.UserService.login(body)
-    return res.status(HttpStatus.OK).json({ payload })
+    const data = await this.UserService.login(body)
+    return res.status(HttpStatus.OK).json({ data })
   }
 
   // add a User

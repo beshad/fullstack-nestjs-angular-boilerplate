@@ -31,11 +31,12 @@ export class AuthService {
     const isMatch = await this.comparePassword(password, user.password)
     if (!isMatch) { throw new UnauthorizedException() }
     return {
-      access_token: this.jwtService.sign({
+      token: this.jwtService.sign({
         email: user.email,
+        fullname: user.fullname,
+        role: user.role,
         sub: user.userId
-      }),
-      email: user.email
+      })
     }
   }
 

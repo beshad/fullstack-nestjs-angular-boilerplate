@@ -28,6 +28,13 @@ $fullstack-nestjs-angular-boilerplate-theme: mat-light-theme($fullstack-nestjs-a
 
 @import '~bootstrap/dist/css/bootstrap.min.css';
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import 'themes';
+@import '~@nebular/theme/styles/globals';
+
+@include nb-install() {
+  @include nb-theme-global();
+  @include nb-auth-global(); 
+};
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
