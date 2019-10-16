@@ -26,6 +26,12 @@ export class UserController {
     })
   }
 
+  // forgot password
+  @Post('request-pass')
+  async requestPassword(@Res() res, @Body() body ) {
+    console.log(body)
+  }
+
   // Retrieve Users list
   @UseGuards(AuthGuard('jwt'))
   @Get('users')
