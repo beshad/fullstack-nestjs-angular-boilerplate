@@ -55,8 +55,7 @@ const socialLinks: NbAuthSocialLink[] = [];
             method: 'post',
           },
           logout: {
-            endpoint: '/users/sign-out',
-            method: 'post',
+            endpoint: '',
           },
           requestPass: {
             endpoint: '/users/request-pass',
@@ -118,6 +117,7 @@ const socialLinks: NbAuthSocialLink[] = [];
         logout: {
           redirectDelay: 500,
           strategy: 'email',
+          redirect: '/login/'
         },
         validation: {
           password: {

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { faHome, faUserPlus, faSignInAlt, faSignOutAlt, faTools } from '@fortawesome/free-solid-svg-icons';
 
-import { NbAuthJWTToken, NbAuthService } from '@nebular/auth'
+import { NbAuthJWTToken, NbAuthService, NbTokenService } from '@nebular/auth'
 import { NbAccessChecker } from '@nebular/security'
 
 @Component({
@@ -23,14 +23,13 @@ export class NavbarComponent implements OnInit {
   constructor(
     private authService: NbAuthService,
     private router: Router,
-    public accessChecker: NbAccessChecker
+    public accessChecker: NbAccessChecker,
+    private nbTokenService:NbTokenService
   ) {
     this.authService.onTokenChange()
       .subscribe((token: NbAuthJWTToken) => {
         if (token.isValid()) {
-          // here we receive a payload from the token and assigns it to our `currentUuser` variable 
           this.currentUser = token.getPayload();
-          console.log(this.currentUser)
         }
 
       });
@@ -39,7 +38,8 @@ export class NavbarComponent implements OnInit {
   ngOnInit() { }
 
   logout() {
-    // this.authService.logout();
+    this.nbTokenService.clear();
+    this.router.navigate(['auth/login']);
   }
 
 }
