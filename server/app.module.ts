@@ -5,6 +5,8 @@ import { MongooseModule } from '@nestjs/mongoose'
 import { UserModule } from './src/user/user.module'
 import { AuthModule } from './src/auth/auth.module'
 
+import {default as config} from './config'
+
 const BROWSER_DIR = join(process.cwd(), 'dist/browser')
 
 const domino = require('domino')
@@ -28,7 +30,7 @@ global['document'] = win.document
       liveReload: true,
       viewsPath: BROWSER_DIR
     }),
-    MongooseModule.forRoot('mongodb://localhost/fullstack-nestjs-angular-boilerplate',
+    MongooseModule.forRoot(`mongodb://${config.db.host}:${config.db.port}/${config.db.database}`,
       {
         useNewUrlParser: true,
         useUnifiedTopology: true

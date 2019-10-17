@@ -9,6 +9,8 @@ import { JwtStrategy } from './jwt.strategy';
 import { MongooseModule } from '@nestjs/mongoose';
 import { UserSchema } from '../user/schemas/User.schema';
 
+import {default as config} from '../../config'
+
 @Module({
   imports: [
     MongooseModule.forFeature([{
@@ -21,8 +23,8 @@ import { UserSchema } from '../user/schemas/User.schema';
       session: true
     }),
     JwtModule.register({
-      secret: jwtConstants.secret,
-      signOptions: { expiresIn: '1d' },
+      secret: config.jwt.secret,
+      signOptions: { expiresIn: config.jwt.expiresIn },
     }),
   ],
   providers: [AuthService, LocalStrategy, JwtStrategy],
