@@ -1,8 +1,8 @@
 import { Injectable, forwardRef, Inject } from '@nestjs/common';
 import { Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
-import { User } from './interfaces/User.interface';
-import { CreateUserDTO } from './dto/create-User.dto';
+import { User } from './interfaces/user.interface';
+import { CreateUserDTO } from './dto/create-user.dto';
 import { AuthService } from '../auth/auth.service';
 
 @Injectable()
