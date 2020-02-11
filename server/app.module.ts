@@ -1,17 +1,18 @@
-import { Module } from '@nestjs/common'
+import { Module, NestModule, MiddlewareConsumer, RequestMethod } from '@nestjs/common'
+import { LoggerMiddleware } from './common/middleware/logger.middleware'
 import { AngularUniversalModule } from '@nestjs/ng-universal'
 import { join } from 'path'
 import { MongooseModule } from '@nestjs/mongoose'
 import { UserModule } from './src/user/user.module'
 import { AuthModule } from './src/auth/auth.module'
 
-import {default as config} from './config'
+import { default as config } from './config'
 
 const BROWSER_DIR = join(process.cwd(), 'dist/browser')
 
 const domino = require('domino')
 const fs = require('fs')
-const template = fs.readFileSync(join(BROWSER_DIR , 'index.html')).toString()
+const template = fs.readFileSync(join(BROWSER_DIR, 'index.html')).toString()
 const win = domino.createWindow(template)
 
 global['window'] = win
@@ -33,7 +34,8 @@ global['document'] = win.document
     MongooseModule.forRoot(`mongodb://${config.db.host}:${config.db.port}/${config.db.database}`,
       {
         useNewUrlParser: true,
-        useUnifiedTopology: true
+        useUnifiedTopology: true,
+        useCreateIndex: true
       }),
     UserModule,
     AuthModule
@@ -41,4 +43,10 @@ global['document'] = win.document
   controllers: [],
   providers: []
 })
-export class ApplicationModule { }
+export class ApplicationModule implements NestModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer
+      .apply(LoggerMiddleware)
+      .forRoutes({ path: '*', method: RequestMethod.ALL })
+  }
+}
