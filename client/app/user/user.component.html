@@ -1,0 +1,4 @@
+<h1 [innerHTML]="'Users'" class="text-dark text-center"></h1>
+<ul *ngFor="let user of users">
+  <li class="text-dark">{{user.email}}</li>
+</ul>
