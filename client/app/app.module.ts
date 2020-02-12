@@ -1,20 +1,21 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NgModule, PLATFORM_ID, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { JwtModule, JWT_OPTIONS } from '@auth0/angular-jwt';
-import { CommonModule, isPlatformBrowser } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
+import { BrowserModule } from '@angular/platform-browser'
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
+import { NgModule, PLATFORM_ID, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+import { JwtModule, JWT_OPTIONS } from '@auth0/angular-jwt'
+import { CommonModule, isPlatformBrowser } from '@angular/common'
+import { HttpClientModule } from '@angular/common/http'
 
-import { AppRoutingModule } from '@app/app-routing.module';
-import { AppComponent } from '@app/app.component';
-import { AuthModule } from '@app/auth/auth.module';
-import { BaseModule } from '@app/base/base.module';
+import { AppRoutingModule } from '@app/app-routing.module'
+import { AppComponent } from '@app/app.component'
+import { AuthModule } from '@app/auth/auth.module'
+import { BaseModule } from '@app/base/base.module'
 import { AdminModule } from '@app/admin/admin.module'
+import { UserModule } from '@app/user/user.module'
 
-import { UserService } from '@app/user/user.service';
-import { HomeComponent } from '@app/home/home.component';
-import { NbThemeModule } from '@nebular/theme';
-import { NbEvaIconsModule } from '@nebular/eva-icons';
+import { UserService } from '@app/user/user.service'
+import { HomeComponent } from '@app/home/home.component'
+import { NbThemeModule } from '@nebular/theme'
+import { NbEvaIconsModule } from '@nebular/eva-icons'
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { NbEvaIconsModule } from '@nebular/eva-icons';
     AuthModule,
     BaseModule,
     AdminModule,
+    UserModule,
     CommonModule,
     AppRoutingModule, // AppRoutingModule must be last.
     NbThemeModule.forRoot({ name: 'dark' }),

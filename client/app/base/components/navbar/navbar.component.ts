@@ -1,6 +1,6 @@
 import { Component  } from '@angular/core';
 import { Router } from '@angular/router';
-import { faHome, faUserPlus, faSignInAlt, faSignOutAlt, faTools } from '@fortawesome/free-solid-svg-icons';
+import { faHome, faUserPlus, faSignInAlt, faSignOutAlt, faTools, faUsers } from '@fortawesome/free-solid-svg-icons';
 
 import { NbAuthJWTToken, NbAuthService, NbTokenService } from '@nebular/auth'
 import { NbAccessChecker } from '@nebular/security'
@@ -17,6 +17,7 @@ export class NavbarComponent {
   faSignInAlt = faSignInAlt
   faSignOutAlt = faSignOutAlt
   faTools = faTools
+  faUsers = faUsers
 
   currentUser: any = {}
 

@@ -34,7 +34,7 @@ export class UserController {
 
   // Retrieve Users list
   @UseGuards(AuthGuard('jwt'))
-  @Get('users')
+  @Get('all')
   async getAllUser(@Res() res) {
     const Users = await this.UserService.getAllUser()
     return res.status(HttpStatus.OK).json(Users)

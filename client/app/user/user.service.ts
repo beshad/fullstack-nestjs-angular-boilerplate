@@ -18,7 +18,7 @@ export class UserService {
   }
 
   getUsers(): Observable<User[]> {
-    return this.http.get<User[]>('/api/users');
+    return this.http.get<User[]>('/api/users/all');
   }
 
   countUsers(): Observable<number> {
