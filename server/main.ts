@@ -4,6 +4,8 @@ import { ApplicationModule } from './app.module';
 import * as helmet from 'helmet';
 import * as rateLimit from 'express-rate-limit';
 
+import { default as config } from './config'
+
 import 'localstorage-polyfill';
 global['localStorage'] = localStorage;
 
@@ -31,6 +33,8 @@ async function bootstrap() {
   app.setGlobalPrefix('api');
   app.enableCors(); // enabling CORS
 
-  await app.listen(4000);
+  await app.listen(config.host.port, () => console.log('\x1b[35m%s\x1b[0m', ` ----> full stack nestjs & angular app is listening on port ${config.host.port}!`))
 }
 bootstrap();
+
+

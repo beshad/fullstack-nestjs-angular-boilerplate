@@ -38,10 +38,12 @@ export function getRole() {
         },
         user: {
           parent: 'guest',
-          view: ['admin'],
+          view: ['admin','user'],
         },
         admin: {
-          parent: 'user'
+          parent: 'user',
+          create: '*',
+          remove: '*',
         },
       },
     }),

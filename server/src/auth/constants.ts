@@ -1,4 +1,4 @@
 
 export const jwtConstants = {
-  secret: 'behshad',
+  secret: 'fullstack-nestjs-angular-boiletplate',
 };

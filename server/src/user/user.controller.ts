@@ -1,9 +1,11 @@
-import { Controller, forwardRef, Get, Res, HttpStatus, Post, Body, Put, Query, NotFoundException, Delete, Param, UseGuards, Request } from '@nestjs/common'
+import { Controller, forwardRef, Get, Res, HttpStatus, Post, Body, Put, Headers, Query, NotFoundException, Delete, Param, UseGuards, Request } from '@nestjs/common'
 import { UserService } from './user.service'
 import { CreateUserDTO } from './dto/create-user.dto'
 import { AuthGuard } from '@nestjs/passport'
 
+
 @Controller('users')
+// @UseGuards(AuthGuard('jwt'))
 export class UserController {
   constructor(
     private UserService: UserService
@@ -28,14 +30,14 @@ export class UserController {
 
   // forgot password
   @Post('request-pass')
-  async requestPassword(@Res() res, @Body() body ) {
-    console.log(body)
+  async requestPassword(@Res() res, @Body() body) {
+    // nothing here yet
   }
 
   // Retrieve Users list
-  @UseGuards(AuthGuard('jwt'))
   @Get('all')
-  async getAllUser(@Res() res) {
+  @UseGuards(AuthGuard('jwt'))
+  async getAllUser(@Headers() headers, @Res() res) {
     const Users = await this.UserService.getAllUser()
     return res.status(HttpStatus.OK).json(Users)
   }
