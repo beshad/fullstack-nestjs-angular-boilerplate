@@ -27,8 +27,8 @@ export class UserService {
     return Users;
   }
   // Get a single User
-  async getUser(UserID): Promise<User> {
-    const User = await this.UserModel.findById(UserID).exec();
+  async getUser(id): Promise<User> {
+    const User = await this.UserModel.findById(id).exec();
     return User;
   }
   // post a single User
@@ -37,14 +37,14 @@ export class UserService {
     return newUser.save();
   }
   // Edit User details
-  async updateUser(UserID, createUserDTO: CreateUserDTO): Promise<User> {
+  async updateUser(id, createUserDTO: CreateUserDTO): Promise<User> {
     const updatedUser = await this.UserModel
-      .findByIdAndUpdate(UserID, createUserDTO, { new: true });
+      .findByIdAndUpdate(id, createUserDTO, { new: true });
     return updatedUser;
   }
   // Delete a User
-  async deleteUser(UserID): Promise<any> {
-    const deletedUser = await this.UserModel.findByIdAndRemove(UserID);
+  async deleteUser(id): Promise<any> {
+    const deletedUser = await this.UserModel.findByIdAndRemove(id);
     return deletedUser;
   }
 

@@ -36,8 +36,7 @@ export class AuthService {
     if (!isMatch) { throw new UnauthorizedException() }
     return {
       token: this.jwtService.sign({
-        email: user.email,
-        sub: user.userId
+        email: user.email
       })
     }
   }

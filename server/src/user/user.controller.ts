@@ -3,8 +3,8 @@ import { UserService } from './user.service'
 import { CreateUserDTO } from './dto/create-user.dto'
 
 import { AuthGuard } from '@nestjs/passport'
-import { JwtAuthGuard } from '../auth/jwt-auth.guard';
-import { LocalAuthGuard } from '../auth/local-auth.guard';
+import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
+import { LocalAuthGuard } from '../auth/guards/local-auth.guard';
 import { AuthService } from '../auth/auth.service';
 
 
@@ -50,9 +50,9 @@ export class UserController {
 
   // Fetch a particular User using ID
   @UseGuards(AuthGuard('jwt'))
-  @Get('user/:userID')
-  async getUser(@Res() res, @Param('userID') UserID) {
-    const User = await this.UserService.getUser(UserID)
+  @Get('user/:id')
+  async getUser(@Res() res, @Param('id') id) {
+    const User = await this.UserService.getUser(id)
     if (!User) throw new NotFoundException('User does not exist!')
     return res.status(HttpStatus.OK).json(User)
   }
@@ -60,8 +60,8 @@ export class UserController {
   // Update a User's details
   @UseGuards(AuthGuard('jwt'))
   @Put('/update')
-  async updateUser(@Res() res, @Query('userID') UserID, @Body() createUserDTO: CreateUserDTO) {
-    const User = await this.UserService.updateUser(UserID, createUserDTO)
+  async updateUser(@Res() res, @Query('id') id, @Body() createUserDTO: CreateUserDTO) {
+    const User = await this.UserService.updateUser(id, createUserDTO)
     if (!User) throw new NotFoundException('User does not exist!')
     return res.status(HttpStatus.OK).json({
       message: 'User has been successfully updated',
@@ -72,8 +72,8 @@ export class UserController {
   // Delete a User
   @UseGuards(AuthGuard('jwt'))
   @Delete('/delete')
-  async deleteUser(@Res() res, @Query('UserID') UserID) {
-    const User = await this.UserService.deleteUser(UserID)
+  async deleteUser(@Res() res, @Query('id') id) {
+    const User = await this.UserService.deleteUser(id)
     if (!User) throw new NotFoundException('User does not exist')
     return res.status(HttpStatus.OK).json({
       message: 'User has been deleted',
