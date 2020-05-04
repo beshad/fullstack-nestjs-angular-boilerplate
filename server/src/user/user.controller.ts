@@ -1,17 +1,23 @@
 import { Controller, forwardRef, Get, Res, HttpStatus, Post, Body, Put, Headers, Query, NotFoundException, Delete, Param, UseGuards, Request } from '@nestjs/common'
 import { UserService } from './user.service'
 import { CreateUserDTO } from './dto/create-user.dto'
+
 import { AuthGuard } from '@nestjs/passport'
+import { JwtAuthGuard } from '../auth/jwt-auth.guard';
+import { LocalAuthGuard } from '../auth/local-auth.guard';
+import { AuthService } from '../auth/auth.service';
 
 
 @Controller('users')
 // @UseGuards(AuthGuard('jwt'))
 export class UserController {
   constructor(
-    private UserService: UserService
+    private UserService: UserService,
+    private authService: AuthService
   ) { }
 
   // login a User
+  // @UseGuards(LocalAuthGuard)
   @Post('login')
   async login(@Res() res, @Body() body): Promise<any> {
     const data = await this.UserService.login(body)
@@ -35,9 +41,9 @@ export class UserController {
   }
 
   // Retrieve Users list
+  @UseGuards(JwtAuthGuard)
   @Get('all')
-  @UseGuards(AuthGuard('jwt'))
-  async getAllUser(@Headers() headers, @Res() res) {
+  async getAllUser(@Request() req, @Res() res) {
     const Users = await this.UserService.getAllUser()
     return res.status(HttpStatus.OK).json(Users)
   }
