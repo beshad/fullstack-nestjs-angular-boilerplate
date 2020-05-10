@@ -2,7 +2,7 @@ import { Injectable, forwardRef, Inject } from '@nestjs/common';
 import { Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
 import { User } from './interfaces/user.interface';
-import { CreateUserDTO } from './dto/create-user.dto';
+import { SignUpNewUserDTO } from '../auth/dto/sign-up.dto';
 import { AuthService } from '../auth/auth.service';
 
 @Injectable()
@@ -32,14 +32,14 @@ export class UserService {
     return User;
   }
   // post a single User
-  async addUser(createUserDTO: CreateUserDTO): Promise<User> {
-    const newUser = await this.UserModel(createUserDTO);
+  async addUser(signUpNewUserDTO: SignUpNewUserDTO): Promise<User> {
+    const newUser = await this.UserModel(signUpNewUserDTO);
     return newUser.save();
   }
   // Edit User details
-  async updateUser(id, createUserDTO: CreateUserDTO): Promise<User> {
+  async updateUser(id, signUpNewUserDTO: SignUpNewUserDTO): Promise<User> {
     const updatedUser = await this.UserModel
-      .findByIdAndUpdate(id, createUserDTO, { new: true });
+      .findByIdAndUpdate(id, signUpNewUserDTO, { new: true });
     return updatedUser;
   }
   // Delete a User

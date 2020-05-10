@@ -1,6 +1,6 @@
 import { Controller, forwardRef, Get, Res, HttpStatus, Post, Body, Put, Headers, Query, NotFoundException, Delete, Param, UseGuards, Request } from '@nestjs/common'
 import { UserService } from './user.service'
-import { CreateUserDTO } from './dto/create-user.dto'
+import { SignUpNewUserDTO } from '../auth/dto/sign-up.dto'
 
 import { AuthGuard } from '@nestjs/passport'
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
@@ -26,8 +26,8 @@ export class UserController {
 
   // add a User
   @Post('register')
-  async addUser(@Res() res, @Body() createUserDTO: CreateUserDTO): Promise<any> {
-    const User = await this.UserService.addUser(createUserDTO)
+  async addUser(@Res() res, @Body() signUpNewUserDTO: SignUpNewUserDTO): Promise<any> {
+    const User = await this.UserService.addUser(signUpNewUserDTO)
     return res.status(HttpStatus.OK).json({
       message: "User has been created successfully",
       User
@@ -60,8 +60,8 @@ export class UserController {
   // Update a User's details
   @UseGuards(AuthGuard('jwt'))
   @Put('/update')
-  async updateUser(@Res() res, @Query('id') id, @Body() createUserDTO: CreateUserDTO) {
-    const User = await this.UserService.updateUser(id, createUserDTO)
+  async updateUser(@Res() res, @Query('id') id, @Body() signUpNewUserDTO: SignUpNewUserDTO) {
+    const User = await this.UserService.updateUser(id, signUpNewUserDTO)
     if (!User) throw new NotFoundException('User does not exist!')
     return res.status(HttpStatus.OK).json({
       message: 'User has been successfully updated',
